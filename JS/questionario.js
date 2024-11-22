@@ -4,6 +4,7 @@ function listarQuestao() {
         document.getElementById("btnLogin").style.display = "none";
     } else {
         alert("Ocorreu um erro ao se conectar com o servidor.");
+        document.getElementById("saida").innerHTML = "<div>Usuário não logado!!! efetue o login em <a href="/login.html">Login.</a></div>"
     }
 }
 

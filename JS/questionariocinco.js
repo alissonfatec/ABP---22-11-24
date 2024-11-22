@@ -3,7 +3,8 @@ function listarQuestao() {
     if (usuarioLogado) {
         document.getElementById("btnLogin").style.display = "none";
     } else {
-        alert("Ocorreu um erro ao se conectar com o servidor.");
+        alert("Usuário não logado!!!");
+        document.getElementById("saida").innerHTML = "<div>Usuário não logado!!! efetue o login em <a href="/login.html">Login.</a></div>"
     }
 }
 
