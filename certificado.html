@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada Scrum</title>
+  <link rel="stylesheet" href="/css_ABP/introdução.css">
+  <script src="./JS/geral.js"></script>
+  <script src="./JS/questao.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body onload="carregarLogin();listarQuestao();exibirMail();verificarConclusaoQuestionarios()">
+  <header>
+    <h2 class="logo">
+      <img class="logo" src="/Assets/d8branco 1.png" alt="Logo da Jornada Scrum" />
+    </h2>
+    <nav class="navigation">
+      <a href="./template.html">Início</a>
+      <a href="./trilha_1_1.html">Sua Jornada</a>
+      <a href="./certificado.html" id="btn-perfil" style="display: none;">Perfil</a>
+      <button id="botao-logout" class="botao-logout" onclick="logout()">Logout</button>
+      <button id="btnLogin" class="btnlogin-popup">Login</button>
+      <div class="hamburger" id="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <!-- Conteúdo principal -->
+    <main class="content">
+      <div id="mensagemIncompleta" style="color: red;"><h1>Para acessar o certificado é necessário concluir todas as trilhas</h1></div>
+
+      <div id="certificado-container" style="display: none;">
+        <h2 id="nome-usuario">[Nome do Usuário]</h2> <!-- Aqui será atualizado pelo JavaScript -->
+        <h3>Você conquistou mais uma etapa com muito esforço e dedicação!<br>
+           Agora, pode emitir seu certificado como reconhecimento pelo seu empenho e aprendizado.</h3>
+        <!-- Canvas para desenhar a imagem com o nome -->
+        <canvas id="certificadoCanvas" width="800" height="600" style="border: 1px solid #000;"></canvas>
+        
+        <!-- Paginação -->
+        <div class="pagination">
+          <a href="#" id="downloadBtn" class="btn-download">Download Certificado</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Referência ao arquivo JS externo -->
+  <script src="/JS/certificado.js"></script>
+</body>
+</html>
