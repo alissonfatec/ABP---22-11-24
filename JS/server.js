@@ -41,13 +41,16 @@ app.post('/register', async (req, res) => {
     }
 
     try {
-        const userExists = await pool.query('SELECT * FROM tbusuario WHERE email = $1', [email]);
+        // Remover espaços extras e garantir que o email seja minúsculo
+        const cleanEmail = email.trim().toLowerCase();
+
+        const userExists = await pool.query('SELECT * FROM tbusuario WHERE LOWER(email) = $1', [cleanEmail]);
 
         if (userExists.rows.length > 0) {
             return res.status(400).json({ message: 'Usuário já cadastrado com esse email.' });
         }
 
-        await pool.query('INSERT INTO tbusuario (nome, email) VALUES ($1, $2)', [name, email]);
+        await pool.query('INSERT INTO tbusuario (nome, email) VALUES ($1, $2)', [name, cleanEmail]);
         res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
     } catch (error) {
         console.error(error);
@@ -64,7 +67,10 @@ app.post('/login', async (req, res) => {
     }
 
     try {
-        const user = await pool.query('SELECT * FROM tbusuario WHERE email = $1', [email]);
+        // Remover espaços extras e garantir que o email seja minúsculo
+        const cleanEmail = email.trim().toLowerCase();
+
+        const user = await pool.query('SELECT * FROM tbusuario WHERE LOWER(email) = $1', [cleanEmail]);
 
         if (user.rows.length === 0) {
             return res.status(404).json({ message: 'Usuário não encontrado.' });
