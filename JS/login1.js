@@ -1,4 +1,28 @@
+const wrapper = document.querySelector(".wrapper");
+const loginLink = document.querySelector(".login-link");
+const registerLink = document.querySelector(".register-link");
+const btnPopup = document.querySelector(".btnlogin-popup");
+const iconClose = document.querySelector(".icon-close");
+
+// Manter a alternância entre as abas de login e cadastro
+registerLink.addEventListener("click", () => {
+  wrapper.classList.add("active");
+});
+
+loginLink.addEventListener("click", () => {
+  wrapper.classList.remove("active");
+});
+
+function login() {
+  wrapper.classList.add("active-popup");
+};
+
+iconClose.addEventListener("click", () => {
+  wrapper.classList.remove("active-popup");
+});
+
 // Lógica de Cadastro
+const registerForm = document.querySelector(".form-box.register form");
 registerForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -27,10 +51,12 @@ registerForm.addEventListener("submit", async (event) => {
 });
 
 // Lógica de Login
-loginForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
+const loginForm = document.querySelector("#loginForm");
 
-  const email = loginForm.querySelector('input[type="email"]').value;
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault(); // Impede o envio padrão do formulário
+
+  const email = loginForm.querySelector('input[name="email"]').value;
 
   try {
     const response = await fetch("https://abp-22-11-24.onrender.com/login", {
@@ -53,3 +79,11 @@ loginForm.addEventListener("submit", async (event) => {
     alert("Ocorreu um erro ao se conectar com o servidor.");
   }
 });
+
+// Deixar o localStorage como 'false' nas variáveis
+localStorage.setItem('questionario1Respondido', 'false');
+localStorage.setItem('questionario2Respondido', 'false');
+localStorage.setItem('questionario3Respondido', 'false');
+localStorage.setItem('questionario4Respondido', 'false');
+localStorage.setItem('questionario5Respondido', 'false');
+localStorage.setItem('questionario6Respondido', 'false');
