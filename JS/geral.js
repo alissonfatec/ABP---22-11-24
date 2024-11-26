@@ -1,5 +1,4 @@
-const urlbase = "http://localhost:3000";
-//const urlbase = "https://abp-front-gut5.onrender.com/";
+const urlbase = "https://abp-22-11-24.onrender.com";
 // Variável usada para manter os dados do usuário logado
 // A função carregarLogin verifica se o usuário está logado e carrega na variável usuarioLogado
 let usuarioLogado = undefined;
@@ -16,10 +15,10 @@ function logout() {
   // Remover a propriedade `usuario` do localStorage
   localStorage.removeItem("usuario");
   // Redireciona para a página de login
-  window.location.href = "./login.html";
+  window.location.href = "https://abp-22-11-24.onrender.com/login.html";
 }
 
 function login() {
   // Redireciona para a página de login
-  window.location.href = "./login.html";
+  window.location.href = "https://abp-22-11-24.onrender.com/login.html";
 }
