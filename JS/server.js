@@ -5,17 +5,23 @@ const { Pool } = require('pg'); // Biblioteca para integração com PostgreSQL
 
 // Configuração do pool de conexão com PostgreSQL
 const pool = new Pool({
-    user: 'abpteste_user', // Usuário do banco
-    host: 'dpg-ct2ghtl2ng1s7395ki7g-a.oregon-postgres.render.com', // Host do Render
-    database: 'abpteste', // Nome do banco de dados
-    password: 'xJQYMPKOagS1fZHiy8iGTfGBoq9PMZvm', // Senha do banco
-    port: 5432, // Porta padrão do PostgreSQL
+    connectionString: process.env.DATABASE_URL,  // Usando a URL de conexão que o Render fornece
     ssl: {
-        rejectUnauthorized: false, // Necessário para conexão segura com o Render
+        rejectUnauthorized: false  // Necessário para conexões seguras
+    }
 });
 
 const app = express();
 const PORT = 3000;
+
+// Exemplo de consulta
+pool.query('SELECT NOW()', (err, res) => {
+    if (err) {
+        console.error('Erro na consulta:', err);
+    } else {
+        console.log('Consulta realizada com sucesso:', res.rows);
+    }
+});
 
 // Middleware
 app.use(cors());
