@@ -18,7 +18,7 @@ async function verificarProgresso(numeroQuestionario) {
     const email = usuarioObj.email;
 
     try {
-        const response = await fetch('http://localhost:3000/verificar-progresso', {
+        const response = await fetch('https://abp-22-11-24.onrender.com/verificar-progresso', {  // Alterado para o domínio correto
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, numeroQuestionario }),
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
-                const response = await fetch('http://localhost:3000/salvar-respostas', {
+                const response = await fetch('https://abp-22-11-24.onrender.com/salvar-respostas', {  // Alterado para o domínio correto
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),

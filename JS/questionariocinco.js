@@ -1,13 +1,3 @@
-function listarQuestao() {
-    // Verifica se o usuário está logado
-    if (usuarioLogado) {
-        document.getElementById("btnLogin").style.display = "none";
-    } else {
-        alert("Usuário não logado!!!");
-        document.getElementById("saida").innerHTML = "<div>Usuário não logado!!! efetue o login em <a href="/login.html">Login.</a></div>"
-    }
-}
-
 async function verificarProgresso(numeroQuestionario) {
     const usuario = localStorage.getItem('usuario');
     if (!usuario) {
@@ -19,7 +9,7 @@ async function verificarProgresso(numeroQuestionario) {
     const email = usuarioObj.email;
 
     try {
-        const response = await fetch('http://localhost:3000/verificar-progresso', {
+        const response = await fetch('https://abp-22-11-24.onrender.com/verificar-progresso', {  // Substituído para seu domínio
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, numeroQuestionario }),
@@ -87,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
-                const response = await fetch('http://localhost:3000/salvar-respostas', {
+                const response = await fetch('https://abp-22-11-24.onrender.com/salvar-respostas', {  // Substituído para seu domínio
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),

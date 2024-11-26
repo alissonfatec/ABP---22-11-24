@@ -18,7 +18,7 @@ async function verificarProgresso(numeroQuestionario) {
     const email = usuarioObj.email;
 
     try {
-        const response = await fetch('http://localhost:3000/verificar-progresso', {
+        const response = await fetch('https://seusite.com/verificar-progresso', { // Atualizado para seu site
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, numeroQuestionario }),
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
-                const response = await fetch('http://localhost:3000/salvar-respostas', {
+                const response = await fetch('https://seusite.com/salvar-respostas', { // Atualizado para seu site
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         document.getElementById('enviarRespostas').disabled = true;
                         window.location.href = result.redirect;
                         localStorage.setItem('questionario3Respondido', 'true');
-                        
                     } else {
                         alert('Você não atingiu o número mínimo de acertos. Tente novamente.');
                     }

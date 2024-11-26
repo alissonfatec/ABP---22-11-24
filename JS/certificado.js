@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // Faz a requisição para obter o nome do usuário
-    const response = await fetch("http://localhost:3000/get-nome-usuario", {
+    const response = await fetch("https://abp-22-11-24.onrender.com/get-nome-usuario", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function desenharCertificado(nomeUsuario) {
 
   // Carregar a imagem do certificado original
   const imagemCertificado = new Image();
-  imagemCertificado.src = "/Assets/Certificado.png"; // Caminho para a imagem do certificado base
+  imagemCertificado.src = "https://abp-22-11-24.onrender.com/Assets/Certificado.png"; // Caminho para a imagem do certificado base
 
   // Quando a imagem for carregada, desenha no canvas
   imagemCertificado.onload = () => {
@@ -93,25 +93,25 @@ function desenharCertificado(nomeUsuario) {
 
 // Função para verificar se todos os questionários estão concluídos
 function verificarConclusaoQuestionarios() {
-    const questionarios = [
-      "questionario1Respondido",
-      "questionario2Respondido",
-      "questionario3Respondido",
-      "questionario4Respondido",
-      "questionario5Respondido",
-      "questionario6Respondido"
-    ];
-  
-    const todosConcluidos = questionarios.every(
-      (questao) => localStorage.getItem(questao) === "true"
-    );
-  
-    // Se todos os questionários estiverem concluídos, libera o acesso ao certificado
-    if (todosConcluidos) {
-      document.getElementById("certificado-container").style.display = "block"; // Exibe o conteúdo do certificado
-      document.getElementById("mensagemIncompleta").style.display = "none"; // Esconde a mensagem de erro
-    } else {
-      document.getElementById("certificado-container").style.display = "none"; // Esconde o conteúdo do certificado
-      document.getElementById("mensagemIncompleta").style.display = "block"; // Exibe a mensagem de erro
-    }
+  const questionarios = [
+    "questionario1Respondido",
+    "questionario2Respondido",
+    "questionario3Respondido",
+    "questionario4Respondido",
+    "questionario5Respondido",
+    "questionario6Respondido"
+  ];
+
+  const todosConcluidos = questionarios.every(
+    (questao) => localStorage.getItem(questao) === "true"
+  );
+
+  // Se todos os questionários estiverem concluídos, libera o acesso ao certificado
+  if (todosConcluidos) {
+    document.getElementById("certificado-container").style.display = "block"; // Exibe o conteúdo do certificado
+    document.getElementById("mensagemIncompleta").style.display = "none"; // Esconde a mensagem de erro
+  } else {
+    document.getElementById("certificado-container").style.display = "none"; // Esconde o conteúdo do certificado
+    document.getElementById("mensagemIncompleta").style.display = "block"; // Exibe a mensagem de erro
   }
+}
