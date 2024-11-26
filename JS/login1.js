@@ -4,7 +4,7 @@ const registerLink = document.querySelector(".register-link");
 const btnPopup = document.querySelector(".btnlogin-popup");
 const iconClose = document.querySelector(".icon-close");
 
-// Manter a alternância entre as abas de login e cadastro
+// Alternar entre login e cadastro
 registerLink.addEventListener("click", () => {
   wrapper.classList.add("active");
 });
@@ -22,12 +22,13 @@ iconClose.addEventListener("click", () => {
 });
 
 // Lógica de Cadastro
-const registerForm = document.querySelector(".form-box.register form");
+const registerForm = document.querySelector("#registerForm");
+
 registerForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const name = registerForm.querySelector('input[type="text"]').value;
-  const email = registerForm.querySelector('input[type="email"]').value;
+  const name = registerForm.querySelector('input[name="name"]').value;
+  const email = registerForm.querySelector('input[name="email"]').value;
 
   try {
     const response = await fetch("https://abp-22-11-24.onrender.com/register", {
@@ -40,7 +41,7 @@ registerForm.addEventListener("submit", async (event) => {
 
     if (response.ok) {
       alert(data.message || "Cadastro realizado com sucesso!");
-      wrapper.classList.remove("active"); // Retorna para a aba de login
+      wrapper.classList.remove("active"); // Volta para a aba de login
     } else {
       alert(data.message || "Erro ao cadastrar usuário.");
     }
@@ -69,7 +70,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     if (response.ok) {
       alert(data.message || "Login realizado com sucesso!");
-      localStorage.setItem("usuario", JSON.stringify({ email })); // Armazena o usuário no navegador
+      localStorage.setItem("usuario", JSON.stringify({ email })); // Armazena no localStorage
       window.location.href = "./template.html"; // Redireciona após o login
     } else {
       alert(data.message || "Erro ao fazer login.");
