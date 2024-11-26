@@ -83,6 +83,34 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Rota para salvar respostas de questionário
+app.post('/salvar-respostas', async (req, res) => {
+    const { respostas, numeroQuestionario } = req.body;
+
+    if (!respostas || !numeroQuestionario) {
+        return res.status(400).json({ message: 'Dados incompletos. Respostas e número do questionário são obrigatórios.' });
+    }
+
+    try {
+        // Itera sobre as respostas e insere no banco
+        for (const resposta of respostas) {
+            const { idquestao, resposta_aluno, mail } = resposta;
+
+            await pool.query(
+                'INSERT INTO tbresposta (numero_questionario, id_questao, resposta_aluno, email) VALUES ($1, $2, $3, $4)',
+                [numeroQuestionario, idquestao, resposta_aluno, mail]
+            );
+        }
+
+        // Retorna uma mensagem de sucesso
+        res.status(200).json({ redirect: '/proxima-pagina.html', message: 'Respostas salvas com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao salvar respostas:', error);
+        res.status(500).json({ message: 'Erro ao salvar respostas.' });
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });

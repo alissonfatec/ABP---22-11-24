@@ -4,7 +4,7 @@ function listarQuestao() {
         document.getElementById("btnLogin").style.display = "none";
     } else {
         alert("Ocorreu um erro ao se conectar com o servidor.");
-        document.getElementById("saida").innerHTML = "<div>Usuário não logado!!! Efetue o login em <a href='/login.html'>Login</a>.</div>"
+        document.getElementById("saida").innerHTML = "<div>Usuário não logado!!! efetue o login em <a href="/login.html">Login.</a></div>"
     }
 }
 
@@ -19,7 +19,7 @@ async function verificarProgresso(numeroQuestionario) {
     const email = usuarioObj.email;
 
     try {
-        const response = await fetch('https://abp-22-11-24.onrender.com/verificar-progresso', {
+        const response = await fetch('http://localhost:3000/verificar-progresso', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, numeroQuestionario }),
@@ -40,6 +40,7 @@ async function verificarProgresso(numeroQuestionario) {
     }
 }
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     await verificarProgresso(1);
 
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (usuarioRespondeu === 'true') {
         alert('Você já passou neste questionário e não pode respondê-lo novamente.');
         document.getElementById('enviarRespostas').disabled = true;
-        window.location.href = 'trilha_2_1.html';  // Redireciona para a página correta
+        window.location.href = 'trilha_2_1.html';
     }
 });
 
@@ -71,7 +72,6 @@ document.getElementById('enviarRespostas').addEventListener('click', async () =>
 
     if (!mail) {
         alert('Usuário não está logado.');
-        window.location.href = '/login.html';  // Redireciona para a página de login
         return;
     }
 
@@ -82,14 +82,17 @@ document.getElementById('enviarRespostas').addEventListener('click', async () =>
     };
 
     try {
+        console.log('Enviando dados para o servidor:', JSON.stringify(data));
         const response = await fetch('https://abp-22-11-24.onrender.com/salvar-respostas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         });
-
+    
+        console.log('Status da resposta:', response.status);
         if (response.ok) {
             const result = await response.json();
+            console.log('Resposta do servidor:', result);
             if (result.redirect) {
                 alert('Você obteve êxito no questionário. Parabéns!');
                 document.getElementById('enviarRespostas').disabled = true;
@@ -99,10 +102,14 @@ document.getElementById('enviarRespostas').addEventListener('click', async () =>
                 alert('Você não atingiu o número mínimo de acertos. Tente novamente.');
             }
         } else {
+            const errorText = await response.text(); // Lê a resposta de erro como texto
+            console.error('Erro na resposta do servidor:', errorText);
             alert('Erro ao enviar respostas.');
         }
     } catch (error) {
         console.error('Erro:', error);
         alert('Erro ao conectar com o servidor.');
     }
+    
 });
+
