@@ -17,10 +17,8 @@ function listarQuestao() {
         document.getElementById("botao-logout").style.display="none";
         document.getElementById("btn-perfil").style.display = "none";
         document.getElementById("saida").innerHTML =
-       "<p>O usuário não está logado. Clique para efetuar o <a href='./login.html'>login</a>.</p>";
+       "<p>O usuário não está logado. Clique para efetuar o <a href='https://abp-22-11-24.onrender.com/login.html'>login</a>.</p>";
         const mensagem = "Usuário não logado, realize o login para continuar";
         alert(mensagem);
     }
 }
-
-  
