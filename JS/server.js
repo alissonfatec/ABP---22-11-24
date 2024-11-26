@@ -5,11 +5,13 @@ const { Pool } = require('pg'); // Biblioteca para integração com PostgreSQL
 
 // Configuração do pool de conexão com PostgreSQL
 const pool = new Pool({
-    user: 'abpteste_user',
-    host: 'dpg-ct2ghtl2ng1s7395ki7g-a.internal.render.com', // Substitua com o host interno correto
-    database: 'abpteste',
-    password: 'xJQYMPKOagS1fZHiy8iGTfGBoq9PMZvm',
-    port: 5432,
+    user: 'abpteste_user', // Usuário do banco
+    host: 'dpg-ct2ghtl2ng1s7395ki7g-a.oregon-postgres.render.com', // Host do Render
+    database: 'abpteste', // Nome do banco de dados
+    password: 'xJQYMPKOagS1fZHiy8iGTfGBoq9PMZvm', // Senha do banco
+    port: 5432, // Porta padrão do PostgreSQL
+    ssl: {
+        rejectUnauthorized: false, // Necessário para conexão segura com o Render
 });
 
 const app = express();
